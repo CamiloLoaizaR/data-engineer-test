@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: dim_skill_categories
+    description: Table containing categories of skills extracted from job postings.
+    columns:
+      - name: id
+        description: Unique identifier for the skill category.
+        tests:
+          - not_null
+          - unique
+
+      - name: name
+        description: Name of the skill categories.
+        tests:
+          - not_null
+          - unique
+          - accepted_values:
+              values:
+                - "analyst_tools"
+                - "async"
+                - "cloud"
+                - "databases"
+                - "libraries"
+                - "os"
+                - "other"
+                - "programming"
+                - "sync"
+                - "webframeworks"

@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: dim_skills
+    description: Table containing unique skills extracted from job postings.
+    columns:
+      - name: id
+        description: Unique identifier for the skill.
+        tests:
+          - not_null
+          - unique
+
+      - name: name
+        description: Name of the skill.
+        tests:
+          - not_null
+          - unique

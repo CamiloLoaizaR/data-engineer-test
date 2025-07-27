@@ -1,0 +1,75 @@
+version: 2
+
+models:
+  - name: dim_fact_jobs
+    description: Table containing job postings with foreign keys to another tables.
+    columns:
+      - name: id
+        description: Unique identifier for the job posting.
+        tests:
+          - not_null
+          - unique
+
+      - name: job_category_id
+        description: Foreign key referencing the job category.
+        tests:
+          - relationships:
+              to: ref('dim_job_categories')
+              field: id
+
+      - name: job_title
+        description: Full job title as published in the job posting.
+        tests: []
+
+      - name: job_work_from_home
+        description: Boolean flag indicating if the job supports remote work.
+        tests: []
+
+      - name: job_posted_date
+        description: Date the job was posted.
+        tests:
+          - not_null
+
+      - name: job_no_degree_mention
+        description: Boolean flag indicating if the job posting mentions that a degree is not required.
+        tests: []
+
+      - name: job_health_insurance
+        description: Boolean flag indicating if the job offers health insurance.
+        tests: []
+
+      - name: salary_rate_id
+        description: Foreign key referencing the salary rate type.
+        tests:
+          - relationships:
+              to: ref('dim_salary_rate_types')
+              field: id
+
+      - name: salary_year_avg
+        description: Average yearly salary.
+        tests: []
+
+      - name: salary_hour_avg
+        description: Average hourly salary.
+        tests: []
+
+      - name: location_id
+        description: Foreign key referencing the job location.
+        tests:
+          - relationships:
+              to: ref('dim_locations')
+              field: id
+
+      - name: company_id
+        description: Foreign key referencing the company offering the job.
+        tests:
+          - relationships:
+              to: ref('dim_companies')
+              field: id
+
+      - name: job_sources_id
+        description: Foreign key referencing the job source (where it was published).
+        tests:
+          - relationships:
+              to: ref('dim_job_sources')
+              field: id

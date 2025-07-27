@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: dim_job_skills
+    description: Table linking jobs to skills and skill categories.
+    columns:
+      - name: id
+        description: Key for this job-skill-category relation.
+        tests:
+          - not_null
+          - unique
+
+      - name: job_id
+        description: Foreign key to fact_jobs.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('fact_jobs')
+              field: id
+
+      - name: skill_id
+        description: Foreign key to dim_skills.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_skills')
+              field: id
+
+      - name: category_id
+        description: Foreign key to dim_skill_categories.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_skill_categories')
+              field: id

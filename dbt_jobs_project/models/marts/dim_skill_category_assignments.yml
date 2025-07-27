@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: dim_skill_category_assignments
+    description: Table assigning each skill to its corresponding skill category.
+    columns:
+      - name: id
+        description: Unique identifier for the skill-category assignment.
+        tests:
+          - not_null
+          - unique
+
+      - name: skill_id
+        description: Foreign key referencing the dim_skills table.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_skills')
+              field: id
+
+      - name: category_id
+        description: Foreign key referencing the dim_skill_categories table.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_skill_categories')
+              field: id

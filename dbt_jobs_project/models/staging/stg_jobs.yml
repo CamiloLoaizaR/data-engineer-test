@@ -1,0 +1,53 @@
+version: 2
+models:
+- name: stg_jobs
+  description: Staging model for jobs data with normalized values.
+  columns:
+  - name: id
+    tests:
+    - not_null
+    - unique
+  - name: job_title_short
+    tests:
+    - not_null
+  - name: job_title
+    tests:
+      - dbt_expectations.expect_column_values_to_not_be_null:
+          config:
+            severity: warn
+  - name: job_location
+    tests: []
+  - name: search_location
+    tests:
+    - not_null
+  - name: job_country
+    tests:
+      - accepted_values:
+          values: ['Afghanistan', 'Albania', 'Algeria', 'Angola', 'Argentina', 'Armenia', 'Australia', 'Austria', 'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Benin', 'Bhutan', 'Bolivia', 'Bosnia And Herzegovina', 'Botswana', 'Brazil', 'Brunei', 'Bulgaria', 'Burkina Faso', 'Cambodia', 'Cameroon', 'Canada', 'Cayman Islands', 'Chile', 'China', 'Colombia', 'Congo, Democratic Republic Of The', 'Costa Rica', "Côte D''Ivoire", 'Croatia', 'Curaçao', 'Cyprus', 'Czechia', 'Denmark', 'Djibouti', 'Dominican Republic', 'Ecuador', 'Egypt', 'El Salvador', 'Estonia', 'Ethiopia', 'Fiji', 'Finland', 'France', 'Gambia', 'Germany', 'Ghana', 'Greece', 'Guadeloupe', 'Guam', 'Guatemala', 'Guinea', 'Guyana', 'Haiti', 'Honduras', 'Hong Kong', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iraq', 'Ireland', 'Israel', 'Italy', 'Jamaica', 'Japan', 'Jordan', 'Kazakhstan', 'Kenya', 'Kuwait', 'Kyrgyzstan', 'Laos', 'Latvia', 'Lebanon', 'Lesotho', 'Liberia', 'Libya', 'Lithuania', 'Luxembourg', 'Macedonia (Fyrom)', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta', 'Mauritania', 'Mauritius', 'Mexico', 'Moldova', 'Mongolia', 'Montenegro', 'Morocco', 'Mozambique', 'Myanmar', 'Namibia', 'Nepal', 'Netherlands', 'New Zealand', 'Nicaragua', 'Nigeria', 'Northern Mariana Islands', 'Norway', 'Oman', 'Pakistan', 'Palestine', 'Panama', 'Papua New Guinea', 'Paraguay', 'Peru', 'Philippines', 'Poland', 'Portugal', 'Puerto Rico', 'Qatar', 'Réunion', 'Romania', 'Russia', 'Rwanda', 'Saudi Arabia', 'Senegal', 'Serbia', 'Singapore', 'Slovakia', 'Slovenia', 'Somalia', 'South Africa', 'South Korea', 'Spain', 'Sri Lanka', 'Sudan', 'Suriname', 'Sweden', 'Switzerland', 'Taiwan', 'Tajikistan', 'Tanzania', 'Thailand', 'Togo', 'Trinidad And Tobago', 'Tunisia', 'Turkey', 'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States', 'Uruguay', 'U.S. Virgin Islands', 'Uzbekistan', 'Venezuela', 'Vietnam', 'Yemen', 'Zambia', 'Zimbabwe']
+          config:
+            severity: warn
+  - name: job_via
+    tests: []
+  - name: job_schedule_type
+    tests: []
+  - name: job_work_from_home
+    tests: []
+  - name: job_posted_date
+    tests:
+    - not_null
+  - name: job_no_degree_mention
+    tests: []
+  - name: job_health_insurance
+    tests: []
+  - name: salary_rate
+    tests: []
+  - name: salary_year_avg
+    tests: []
+  - name: salary_hour_avg
+    tests: []
+  - name: company_name
+    tests: []
+  - name: job_skills
+    tests: []
+  - name: job_type_skills
+    tests: []

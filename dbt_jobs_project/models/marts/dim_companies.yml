@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: dim_companies
+    description: Table containing company names.
+    columns:
+      - name: id
+        description: Key for the company.
+        tests:
+          - not_null
+          - unique
+
+      - name: name
+        description: Name of the company.
+        tests:
+          - not_null
+          - unique

@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: dim_schedule_types
+    description: Table that contains normalized job schedule types extracted from job postings.
+    columns:
+      - name: id
+        description: Unique identifier for the schedule type.
+        tests:
+          - not_null
+          - unique
+
+      - name: name
+        description: Normalized job schedule type.
+        tests:
+          - not_null
+          - unique
+          - accepted_values:
+              values:
+                - "Contractor"
+                - "Full-Time"
+                - "Internship"
+                - "Part-Time"
+                - "Per Diem"
+                - "Temp Work"
+                - "Volunteer"

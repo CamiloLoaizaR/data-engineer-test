@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: dim_job_sources
+    description: Table that contains the unique job posting sources.
+    columns:
+      - name: id
+        description: Unique identifier for the job source.
+        tests:
+          - not_null
+          - unique
+
+      - name: publication_source
+        description: Name of the job posting source.
+        tests:
+          - not_null
+          - unique

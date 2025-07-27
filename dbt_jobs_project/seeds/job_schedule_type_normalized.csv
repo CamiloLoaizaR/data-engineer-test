@@ -1,0 +1,48 @@
+original,normalized_value
+Temp work,Temp work
+"Full-time, Part-time, and Volunteer","Full-time, Part-time, Volunteer"
+Part-time and Volunteer,"Part-time, Volunteer"
+Per diem,Per diem
+Part-time and Internship,"Internship, Part-time"
+"Full-time, Contractor, and Temp work","Contractor, Full-time, Temp work"
+Full-time and Temp work,"Full-time, Temp work"
+Full-time and Per diem,"Full-time, Per diem"
+"Part-time, Contractor, and Temp work","Contractor, Part-time, Temp work"
+Part-time and Temp work,"Part-time, Temp work"
+Internship and Per diem,"Internship, Per diem"
+"Full-time, Temp work, and Per diem","Full-time, Per diem, Temp work"
+Temp work and Internship,"Internship, Temp work"
+"Full-time, Part-time, and Temp work","Full-time, Part-time, Temp work"
+"Full-time, Temp work, and Internship","Full-time, Internship, Temp work"
+"Full-time, Contractor, and Volunteer","Contractor, Full-time, Volunteer"
+Kontraktor,Contractor
+Full-time and Internship,"Full-time, Internship"
+Temp work and Full-time,"Full-time, Temp work"
+Contractor and Per diem,"Contractor, Per diem"
+"Part-time, Internship, and Volunteer","Internship, Part-time, Volunteer"
+Volunteer,Volunteer
+"Full-time, Part-time, and Contractor","Contractor, Full-time, Part-time"
+Full-time,Full-time
+"Full-time, Part-time, and Per diem","Full-time, Part-time, Per diem"
+Full-time and Volunteer,"Full-time, Volunteer"
+"Full-time, Part-time, and Internship","Full-time, Internship, Part-time"
+Contractor and Internship,"Contractor, Internship"
+"Full-time, Contractor, and Internship","Contractor, Full-time, Internship"
+Full-time and Contractor,"Contractor, Full-time"
+Internship,Internship
+Contractor and Temp work,"Contractor, Temp work"
+Full-time and Part-time,"Full-time, Part-time"
+Contractor and Full-time,"Contractor, Full-time"
+"Part-time, Temp work, and Internship","Internship, Part-time, Temp work"
+Contractor,Contractor
+Part-time and Full-time,"Full-time, Part-time"
+Part-time and Per diem,"Part-time, Per diem"
+"Temp work, Full-time, and Part-time","Full-time, Part-time, Temp work"
+Internship and Full-time,"Full-time, Internship"
+Part-time,Part-time
+Internship and Volunteer,"Internship, Volunteer"
+"Contractor, Temp work, and Internship","Contractor, Internship, Temp work"
+Pekerjaan tetap,Full-time
+Contractor and Part-time,"Contractor, Part-time"
+"Part-time, Contractor, and Internship","Contractor, Internship, Part-time"
+Part-time and Contractor,"Contractor, Part-time"

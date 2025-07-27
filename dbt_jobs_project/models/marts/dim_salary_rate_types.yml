@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: dim_salary_rate_types
+    description: Table containing distinct salary rate types extracted from job postings.
+    columns:
+      - name: id
+        description: Unique identifier for the salary rate type.
+        tests:
+          - not_null
+          - unique
+
+      - name: name
+        description: Salary rate type.
+        tests:
+          - not_null
+          - unique
+          - accepted_values:
+              values: ["day", "hour", "month", "week", "year"]

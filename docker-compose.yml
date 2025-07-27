@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:14
+    container_name: pg_jobs
+    restart: always
+    environment:
+      POSTGRES_DB: ${DBT_DB_NAME}
+      POSTGRES_USER: ${DBT_DB_USER}
+      POSTGRES_PASSWORD: ${DBT_DB_PASSWORD}
+    ports:
+      - "${DBT_DB_PORT:-5433}:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+volumes:
+  pg_data:

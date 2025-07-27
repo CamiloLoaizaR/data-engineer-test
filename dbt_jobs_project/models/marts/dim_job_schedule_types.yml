@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: dim_job_schedule_types
+    description: Table of unique job schedule types.
+    columns:
+      - name: id
+        description: Key for schedule type.
+        tests:
+          - not_null
+          - unique
+
+      - name: name
+        description: Unique name of the schedule type.
+        tests:
+          - not_null
+          - unique

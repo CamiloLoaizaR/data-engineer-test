@@ -1,0 +1,26 @@
+[project]
+name = "data-engineer-test"
+version = "0.1.0"
+description = "ETL and normalization pipeline for job market data"
+authors = ["Camilo Loaiza <ca.loaiza6@gmail.com>"]
+requires-python = ">=3.10"
+readme = "README.md"
+
+dependencies = [
+    "dbt-postgres==1.9.0",
+    "pandas==2.3.1",
+    "openpyxl>=3.1.0",
+    "psycopg2-binary>=2.9.10",
+    "python-dotenv>=1.0.1",
+]
+
+[tool.black]
+line-length = 88
+target-version = ['py39']
+
+[tool.isort]
+profile = "black"
+
+[build-system]
+requires = ["uv"]
+build-backend = "uv.build"

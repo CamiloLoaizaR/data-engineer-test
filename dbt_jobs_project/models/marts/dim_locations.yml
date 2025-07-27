@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: dim_locations
+    description: Table containing unique job locations, associated search locations, and their corresponding countries.
+    columns:
+      - name: id
+        description: Unique identifier for the location.
+        tests:
+          - not_null
+          - unique
+
+      - name: location
+        description: Full job location string as shown in the job posting
+        tests:
+          - not_null
+
+      - name: search_location
+        description: Simplified location string used by the bot to perform the job search
+        tests:
+          - not_null
+
+      - name: country_id
+        description: Foreign key referencing the country associated with the location.
+        tests:
+          - relationships:
+              to: ref('dim_countries')
+              field: id

@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: dim_job_categories
+    description: Table with unique job categories derived from job_title_short.
+    columns:
+      - name: id
+        description: Key for the job category.
+        tests:
+          - not_null
+          - unique
+
+      - name: name
+        description: Category name from job_title_short.
+        tests:
+          - not_null
+          - unique
