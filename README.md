@@ -84,3 +84,51 @@
     ```
 
 DBT shows output per test. Failed tests produce .sql files in target/compiled/ that can be reviewed and re-executed manually to debug.
+
+### STAR SCHEMA PROPOSAL
+
+![](StarSchema.png)
+
+* Fact table: The central table in the Star Schema is *fact_jobs* that records each job posting as a fact. The granularity is one row per job posting, this means the most atomic level is each unique job listing.
+
+* Dimensions:
+
+    1. dim_company:
+        * Contains information about the companies posting jobs.
+        * Columns: company_id, company_name
+    2. dim_date:
+        * Date dimension used to analyze events over time.
+        * Columns: date_id, date, year, month, day, quarter
+    3. dim_location:
+        * Represents geographic data of the job.
+        * Columns: location_id, location, search_location, country
+    4. dim_salary_rate_type:
+        * Contains unique values of salary rate.
+        * Columns: salary_rate_id, name
+    5. dim_job_category:
+        * Based on normalized job_title_short.
+        * Columns: category_id, name
+    6. dim_source:
+        * Contains info where the job was posted.
+        * Columns: source_id, publication_source
+    7. dim_schedule_type:
+        * Captures schedule categories
+        * Columns: schedule_type_id, name
+    8. dim_junk_flags:
+        * A "junk dimension" that holds multiple boolean flags.
+        * Columns: flag_id, no_degree, health_insurance, work_from_home
+    9. dim_skill:
+        * Contains list of job skills
+        * Columns: job_id, name 
+    10. dim_skill_category:
+        * Contains list of job skills categories
+        * Columns: category_id, name
+
+* Numerical metrics: The most useful quantitative fields stored in fact_jobs:
+    * salary_year_avg: Average annual salary
+    * salary_hour_avg: Average hourly salary
+    * posted_date
+
+* Design challenges: 
+    * To manage job skills data, a bridge table is used to connect fact_jobs, dim_skills and dim_skill_category
+    * To manage the boolean data, a "junk dimension" is used instead of keeping them in the fact table.
