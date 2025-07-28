@@ -74,6 +74,6 @@ jobs:
         working-directory: dbt_jobs_project
         run: |
           dbt deps
-          dbt seed --profiles-dir . --target dev
-          dbt run --profiles-dir . --target dev
-          dbt test --profiles-dir . --target dev
+          dbt seed --profiles-dir .dbt --target dev
+          dbt run --profiles-dir .dbt --target dev
+          dbt test --profiles-dir .dbt --target dev
