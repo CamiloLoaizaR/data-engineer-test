@@ -1,0 +1,79 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - master
+      - test
+    paths:
+      - dbt_jobs_project/models/**
+      - dbt_jobs_project/seeds/**
+      - dbt_jobs_project/tests/**
+      - dbt_jobs_project/macros/**
+      - dbt_jobs_project/dbt_project.yml
+      - ingest_jobs.py
+      - pyproject.toml
+      - requirements.txt
+      - .github/workflows/**
+    pull_request:
+  
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_DB: ${{ env.DBT_DB_NAME }}
+          POSTGRES_USER: ${{ env.DBT_DB_USER }}
+          POSTGRES_PASSWORD: ${{ env.DBT_DB_PASSWORD }}
+        ports:
+          - 5433:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DBT_DB_NAME: ${{ secrets.DBT_DB_NAME }}
+      DBT_DB_USER: ${{ secrets.DBT_DB_USER }}
+      DBT_DB_PASSWORD: ${{ secrets.DBT_DB_PASSWORD }}
+      DBT_DB_HOST: ${{ secrets.DBT_DB_HOST }}
+      DBT_DB_PORT: ${{ secrets.DBT_DB_PORT }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install ruff
+
+      - name: Check Lint
+        run: ruff check .
+
+      - name: Check Formatting
+        run: ruff format --check .
+
+      - name: Check Import Sorting
+        run: ruff check --select I .
+
+      - name: Run Python ingest script
+        run: |
+          python ingest_jobs.py
+
+      - name: Run DBT tests
+        working-directory: dbt_jobs_project
+        run: |
+          dbt deps
+          dbt seed --profiles-dir . --target dev
+          dbt run --profiles-dir . --target dev
+          dbt test --profiles-dir . --target dev

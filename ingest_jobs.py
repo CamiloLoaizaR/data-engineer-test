@@ -1,11 +1,12 @@
+import ast
+import json
 import os
-from dotenv import load_dotenv
+import re
+
 import pandas as pd
 import psycopg2
+from dotenv import load_dotenv
 from psycopg2.extras import execute_values
-import ast
-import re
-import json
 
 from logs import get_logger
 
@@ -29,20 +30,20 @@ try:
     logger.info(f"CSV file loaded with {len(df)} rows.")
 
     for col in ["job_skills", "job_type_skills"]:
-        df[col] = df[col].apply(lambda x: None if re.findall('^\s*$',str(x)) else x)
+        df[col] = df[col].apply(lambda x: None if re.findall("^\s*$", str(x)) else x)
 
-    df["job_skills"] = df["job_skills"].apply(lambda x: json.dumps(ast.literal_eval(x))
-                                            if pd.notnull(x) 
-                                            else None)
+    df["job_skills"] = df["job_skills"].apply(
+        lambda x: json.dumps(ast.literal_eval(x)) if pd.notnull(x) else None
+    )
 
-    df["job_type_skills"] = df["job_type_skills"].apply(lambda x: json.dumps(ast.literal_eval(x))
-                                                        if pd.notnull(x) 
-                                                        else None)
+    df["job_type_skills"] = df["job_type_skills"].apply(
+        lambda x: json.dumps(ast.literal_eval(x)) if pd.notnull(x) else None
+    )
 
     df = df.where(pd.notnull(df), None)
 
     logger.info("Connecting to the database...")
-    
+
     conn = psycopg2.connect(**DB_PARAMS)
     cur = conn.cursor()
 
@@ -92,13 +93,12 @@ try:
     chunk_size = 10000
     for i in range(0, len(records), chunk_size):
         logger.info(f"Inserting records {i} to {i + chunk_size}...")
-        execute_values(cur, query, records[i:i + chunk_size])
-
+        execute_values(cur, query, records[i : i + chunk_size])
 
     conn.commit()
     logger.info("All records inserted successfully.")
 
-except:
+except Exception:
     logger.exception("An error occurred during pipeline execution.")
 finally:
     if "cur" in locals():
