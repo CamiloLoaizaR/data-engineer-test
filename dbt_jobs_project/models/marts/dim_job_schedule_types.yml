@@ -2,16 +2,26 @@ version: 2
 
 models:
   - name: dim_job_schedule_types
-    description: Table of unique job schedule types.
+    description: Table between jobs and their associated schedule types.
     columns:
       - name: id
-        description: Key for schedule type.
+        description: Key for job schedule type.
         tests:
           - not_null
           - unique
 
-      - name: name
-        description: Unique name of the schedule type.
+      - name: job_id
+        description: Foreign key to the `jobs` table.
         tests:
           - not_null
-          - unique
+          - relationships:
+              to: ref('fact_jobs')
+              field: id
+
+      - name: schedule_type_id
+        description: Foreign key to the `dim_schedule_types` dimension.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_schedule_types')
+              field: id
